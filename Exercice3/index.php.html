@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire AJAX</title>
+    <script type="text/javascript" src="getXHR.js"></script>
+</head>
+<body>
+<form action="validation.php" method="post">
+    <div>
+        <label for="name">Marque : </label>
+        <input type="text" id="name" name="marque" />
+    </div>
+    <div>
+        <label for="firstName">Modèle: </label>
+        <input type="text" id="firstName" name="modèle" />
+    </div>
+    <div>
+        <label for="mail">Année : </label>
+        <input type="text" id="mail" name="année" />
+    </div>
+    <div>
+        <label for="password">Couleur : </label>
+        <input type="password" id="password" name="couleur" />
+    </div>
+    <div>
+        <input type="reset" value="Effacer" />
+        <input type="submit" value="Envoyer" />
+    </div>
+    <div>
+        <p id="validation" ondblclick="sendForm()">Envoyer données</p>
+    </div>
+</form>
+<script type="text/javascript">
+    var sendForm = function() {
+        var véhicule = getXHR();
+        véhicule.onreadystatechange = function() {
+            if(véhicule.readyState == 4 && (véhicule.status == 200 || véhicule.status == 0)) {
+                console.log(véhicule.responseText);
+            }
+        }
+
+        var marque = document.getElementById('name').value;
+        var modèle = document.getElementById('firstName').value;
+        var année = document.getElementById('mail').value;
+        var couleur = document.getElementById('password').value;
+        var data = "name=" + name + "&firstName=" + firstName + "&mail=" + mail + "&password=" + password;
+        véhicule.open("POST", "validation.php", true);
+        véhicule.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        véhicule.send(data);
+    };
+</script>
+</body>
+</html>
