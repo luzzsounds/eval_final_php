@@ -1,5 +1,5 @@
 <?php
-
+/*----------------------------EXERCICE 2 LUDWIG---------------*/
 require_once 'connection.php';
 
 $order = '';
